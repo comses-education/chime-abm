@@ -1,12 +1,6 @@
-# CHIME-ABM specific ignores
-.CHIME.tmp.nlogo
-*.png
-output
-
-# singularity images + generated output
+# ignore singularity images and anything in the results folder
 *.sif
-*.submit
-results/*.csv
+results
 
 # Dropbox settings and caches
 .dropbox
