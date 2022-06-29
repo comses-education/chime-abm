@@ -12,10 +12,10 @@ Stage: spython-base
 This container bundles the computational model code and dependencies for the CHIME-ABM model 
 
 %files
-	. /srv/code
+	. /code
 
 %post
-    ln -s /srv/results /srv/code/
+    ln -s /srv/results /code/
 
 %runscript
 	exec /opt/netlogo/netlogo-headless.sh "$@"
