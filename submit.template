@@ -17,7 +17,7 @@ request_disk = 25 GB
 # pass in the full path or relative path Julia entrypoint as an argument (relative to the pwd of the singularity
 # container)
 Executable = job-wrapper.sh
-Arguments = /srv/${ENTRYPOINT_SCRIPT}
+Arguments = ${ENTRYPOINT_SCRIPT_EXECUTABLE} /srv/${ENTRYPOINT_SCRIPT}
 
 # Inputs/outputs - in this case all model code is in the container at /code but the particular script we want to run
 # should be in a scripts directory relative to this submit script e.g., ./scripts/MODEL_NAME/
