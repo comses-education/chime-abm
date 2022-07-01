@@ -3,10 +3,11 @@
 *.png
 output
 
-# singularity images + generated output
+# singularity images, generated output, and user customized files
 *.sif
 *.submit
 results/*.csv
+config.mk
 
 # Dropbox settings and caches
 .dropbox
