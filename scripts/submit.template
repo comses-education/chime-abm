@@ -22,7 +22,7 @@ Arguments = ${ENTRYPOINT_SCRIPT_EXECUTABLE} /srv/${ENTRYPOINT_SCRIPT}
 # Inputs/outputs - in this case all model code is in the container at /code but the particular script we want to run
 # should be in a scripts directory relative to this submit script e.g., ./scripts/MODEL_NAME/
 # If you leave out transfer_output_files, all generated files comes back
-transfer_input_files = scripts/${ENTRYPOINT_SCRIPT}
+transfer_input_files = ${ENTRYPOINT_SCRIPT}
 transfer_output_files = ${OUTPUT_FILES}
 
 # Error and output are the error and output channels from your job
