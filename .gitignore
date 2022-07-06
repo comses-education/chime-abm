@@ -1,6 +1,8 @@
 # CHIME-ABM specific ignores
 .CHIME.tmp.nlogo
 *.png
+*.csv
+*.webloc
 output
 
 # singularity images, generated output, and user customized files
