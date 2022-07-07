@@ -41,10 +41,14 @@ $(OSG_SUBMIT_FILENAME): $(OSG_SUBMIT_TEMPLATE)
 	OUTPUT_FILES=${OSG_OUTPUT_FILES} \
 	envsubst < ${OSG_SUBMIT_TEMPLATE} > ${OSG_SUBMIT_FILENAME}
 
-build: $(SINGULARITY_DEF) $(SINGULARITY_IMAGE_NAME) $(OSG_SUBMIT_FILENAME)
+build-docker: $(OSG_SUBMIT_FILENAME)
 	docker build -t comses/${MODEL_NAME}:${CURRENT_VERSION} .
 
-.PHONY: clean deploy
+build-singularity: $(SINGULARITY_DEF) $(SINGULARITY_IMAGE_NAME)
+
+build: build-docker build-singularity
+
+.PHONY: clean deploy docker-run singularity-run
 
 clean:
 	rm -f ${SINGULARITY_IMAGE_NAME} ${OSG_SUBMIT_FILENAME} *~
@@ -57,3 +61,6 @@ deploy: build
 	ssh ${OSG_USERNAME}@osg "mkdir -p ${MODEL_NAME}"
 	echo "Copying submit filename, job script, and model-specific scripts in ./scripts/ to /home/${OSG_USERNAME}/${MODEL_NAME}"
 	rsync -avzP scripts/ osg:${MODEL_NAME}/
+
+docker-run: build
+	docker run --rm -it comses/${MODEL_NAME}:${CURRENT_VERSION}
