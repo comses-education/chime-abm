@@ -4,9 +4,9 @@ universe = vanilla
 
 # Job requirements - make sure we're running on a Singularity enabled node with enough resources to execute our code
 Requirements = HAS_SINGULARITY == True && OSG_HOST_KERNEL_VERSION >= 31000
-request_cpus = 2
+request_cpus = 4
 request_memory = 16 GB
-request_disk = 25 GB
+request_disk = 50 GB
 
 # Specify the singularity container environment that the executable declared below should be run on in OSG. By default
 # Looks for a singularity image in /public/${OSG_USERNAME}
