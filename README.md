@@ -1,5 +1,6 @@
 # chime-abm
 
+[![fair-software](https://img.shields.io/badge/fair--software.eu-%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8B%20%20%E2%97%8B%20%20%E2%97%8B-orange)](https://fair-software.eu)
 [![Continuous Integration](https://github.com/comses-education/chime-abm/actions/workflows/makefile.yml/badge.svg)](https://github.com/comses-education/chime-abm/actions/workflows/makefile.yml)
 
 The Communicating Hazard Information in the Modern Environment (CHIME) agent-based model (ABM) was designed to investigate the dynamics of hazardous weather communication and decision making in the context of evolving hazard forecasts and the complex modern information environment. It is implemented in Netlogo, version 6. https://ccl.northwestern.edu/netlogo/
