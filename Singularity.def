@@ -12,9 +12,6 @@ Stage: spython-base
 %help
 This container bundles the computational model code and dependencies for the CHIME-ABM model 
 
-%environment
-    export JAVA_HOME=/usr/local/openjdk-11
-
 %files
 	. /code
 
