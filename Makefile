@@ -27,6 +27,8 @@ SINGULARITY_DEF := Singularity.def
 CURRENT_VERSION := v1
 SINGULARITY_IMAGE_NAME = ${MODEL_NAME}-${CURRENT_VERSION}.sif
 
+.PHONY: clean deploy docker-run singularity-run docker-build singularity-build all
+
 all: build
 
 $(SINGULARITY_IMAGE_NAME):
@@ -48,8 +50,6 @@ singularity-build: $(SINGULARITY_DEF) $(SINGULARITY_IMAGE_NAME)
 
 build: docker-build singularity-build
 
-.PHONY: clean deploy docker-run singularity-run
-
 clean:
 	rm -f ${SINGULARITY_IMAGE_NAME} ${OSG_SUBMIT_FILENAME} *~
 
@@ -66,4 +66,4 @@ docker-run: docker-build
 	docker run --rm -it comses/${MODEL_NAME}:${CURRENT_VERSION} bash /code/scripts/run.sh
 
 singularity-run: singularity-build
-	singularity exec --bind ./singularity-data:/srv --pwd /code chime-abm-v1.sif bash /code/scripts/run.sh
+	singularity exec --bind ./singularity-data:/srv --pwd /code ${SINGULARITY_IMAGE_NAME} bash /code/scripts/run.sh
