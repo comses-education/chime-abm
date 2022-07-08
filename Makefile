@@ -1,5 +1,4 @@
 # customize via `% make build OSG_USERNAME=<your-osg-username>` e.g., `% make build OSG_USERNAME=alee`
-include config.mk
 
 # user to connect to OSG as
 OSG_USERNAME := ${USER}
