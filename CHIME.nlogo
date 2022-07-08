@@ -290,8 +290,8 @@ to Go
 
 
 ; Stop the Model and record output that only saves at the end of the model
-  if which-storm? = "IRMA" and ticks = 132 and using-hpc? = true [ set hurricane-has-passed? true ]
-  if which-storm? = "CHARLEY_REAL" and ticks = 114 and using-hpc? = true  [ set hurricane-has-passed? true ]
+  if which-storm? = "IRMA" and ticks = 132 [ set hurricane-has-passed? true ]
+  if which-storm? = "CHARLEY_REAL" and ticks = 114 [ set hurricane-has-passed? true ]
 
   if hurricane-has-passed? = true[
     if save-county-evacuation-data [record-county-evac-data current-date save-county-evac-data-csv]
@@ -11589,7 +11589,7 @@ set evac-filename "exp-irma-20190828-Irma-evac-nointernet"</setup>
     </enumeratedValueSet>
   </experiment>
   <experiment name="osg_experiment_nocensus_factors" repetitions="2" runMetricsEveryStep="true">
-    <setup>setup-hpc</setup>
+    <setup>setup</setup>
     <go>go</go>
     <enumeratedValueSet variable="census-tract-max-pop">
       <value value="10000"/>
