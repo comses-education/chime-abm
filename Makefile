@@ -63,7 +63,7 @@ deploy: build
 	rsync -avzP scripts/ osg:${MODEL_NAME}/
 
 docker-run: docker-build
-	docker run --rm -it comses/${MODEL_NAME}:${CURRENT_VERSION} /code/scripts/run.sh
+	docker run --rm -it comses/${MODEL_NAME}:${CURRENT_VERSION} bash /code/scripts/run.sh
 
 singularity-run: singularity-build
-	singularity exec --bind ./singularity-data:/srv --pwd /code chime-abm-v1.sif /code/scripts/run.sh
+	singularity exec --bind ./singularity-data:/srv --pwd /code chime-abm-v1.sif bash /code/scripts/run.sh
