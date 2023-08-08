@@ -1,7 +1,9 @@
 # customize via `% make build OSG_USERNAME=<your-osg-username>` e.g., `% make build OSG_USERNAME=alee`
 
 # user to connect to OSG as
-OSG_USERNAME := ${USER}
+OSG_USERNAME := allen.lee
+OSG_SUBMIT_NODE := osg
+OSG_CONTAINER_FILEDIR := /ospool/PROTECTED
 # name of this computational model, used as the namespace (for singularity, Docker, and as a folder to keep things
 # organized on the OSG filesystem login node). recommend that you use all lowercase alphanumeric with - or _ to
 # separate words, e.g., chime-abm or spatial-rust-model
@@ -18,7 +20,7 @@ OSG_OUTPUT_FILES :=
 # OSG submit template
 OSG_SUBMIT_TEMPLATE := scripts/submit.template
 # the submit file to be executed on OSG via `condor_submit ${OSG_SUBMIT_FILE}`
-OSG_SUBMIT_FILENAME := scripts/${MODEL_NAME}.submit
+OSG_SUBMIT_FILENAME := scripts/${MODEL_NAME}.sub
 # the initial entrypoint for the OSG job, calls ENTRYPOINT_SCRIPT
 OSG_JOB_SCRIPT := scripts/job-wrapper.sh
 
@@ -53,13 +55,13 @@ clean:
 	rm -f ${SINGULARITY_IMAGE_NAME} ${OSG_SUBMIT_FILENAME} *~
 
 deploy: build
-	echo "IMPORTANT: This command assumes you have created an ssh alias in your ~/.ssh/config named 'osg' that connects to your OSG connect node"
-	echo "Copying singularity image ${SINGULARITY_IMAGE_NAME} to osg:/public/${OSG_USERNAME}"
-	rsync -avzP ${SINGULARITY_IMAGE_NAME} osg:/public/${OSG_USERNAME}
+	echo "IMPORTANT: This command assumes you have created an ssh alias in your ~/.ssh/config named '${OSG_SUBMIT_NODE}' that connects to your OSG connect node"
+	echo "Copying singularity image ${SINGULARITY_IMAGE_NAME} to osg:${OSG_CONTAINER_FILEDIR}/${OSG_USERNAME}"
+	rsync -avzP ${SINGULARITY_IMAGE_NAME} ${OSG_SUBMIT_NODE}:${OSG_CONTAINER_FILEDIR}/${OSG_USERNAME}
 	echo "Creating ${MODEL_NAME} folder in /home/${OSG_USERNAME}"
-	ssh ${OSG_USERNAME}@osg "mkdir -p ${MODEL_NAME}"
+	ssh ${OSG_USERNAME}@${OSG_SUBMIT_NODE} "mkdir -p ${MODEL_NAME}"
 	echo "Copying submit filename, job script, and model-specific scripts in ./scripts/ to /home/${OSG_USERNAME}/${MODEL_NAME}"
-	rsync -avzP scripts/ osg:${MODEL_NAME}/
+	rsync -avzP scripts/ ${OSG_SUBMIT_NODE}:${MODEL_NAME}/
 
 docker-run: docker-build
 	docker run --rm comses/${MODEL_NAME}:${CURRENT_VERSION} bash /code/scripts/run.sh
