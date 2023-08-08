@@ -11,7 +11,7 @@ request_disk = 50 GB
 # Specify the singularity container environment that the executable declared below should be run on in OSG. By default
 # Looks for a singularity image in /public/${OSG_USERNAME}
 # depends on: `make deploy`
-+SingularityImage = "osdf:///osgconnect/PROTECTED/${OSG_USERNAME}/${SINGULARITY_IMAGE_NAME}"
++SingularityImage = "osdf:///ospool/PROTECTED/${OSG_USERNAME}/${SINGULARITY_IMAGE_NAME}"
 
 # Executable shell script wrapper that prints out basic system info and runs the specified Julia entrypoint script
 # pass in the full path or relative path Julia entrypoint as an argument (relative to the pwd of the singularity
