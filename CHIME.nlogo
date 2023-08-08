@@ -177,11 +177,11 @@ drawers-own  [ cone-size ]          ; stores the cone size at the relevant hour 
 to Setup
   __clear-all-and-reset-ticks
 
-
+print "model setup begun"
   ;;Load Geographic Data Used in the Simulation
   Load-GIS
 
-
+print "load GIS has finished"
   ;Where to have the legend displayed on the Netlogo interface
   let legend-location where-to-place-legend?  ;1=upper-right...2=upper-left...3=lower-left...4=lower-right
   if legend-location = "upper-right" [import-drawing "Legend/Legend_Upper_Right.png"]
@@ -191,11 +191,15 @@ to Setup
 
   Load-Hurricane
 
+print " destructive hurricane loaded"
+
   ;; *SMB We can change this once we finish redoing the forecasts
   ifelse which-storm? = "IRMA" or  which-storm? = "MICHAEL" [ Load-Forecasts-New ] [Load-Forecasts]
 
 
   Generate-Storm  ;; generates the hurricane
+
+print " storm generated"
 
   set clock list item 3 item ticks hurricane-coords-best-track  item 4 item ticks hurricane-coords-best-track    ;; defines the clock
   set county-evacuation-list []
@@ -224,6 +228,8 @@ to Setup
    set risk-surge 0
    set current-date item 0 clock
 
+print "setup completed"
+
 end
 
 
@@ -234,6 +240,9 @@ to Go
   ; CALLED BY:
 
 ;show ticks
+
+print "model running - step:"
+show ticks
 
   ;;The hurricane moves to its historical location based on the time.
   ;ifelse using-hpc? [][Move-Hurricane]    ;; calls procedure to move the hurricane one time step - only show the visualization if using a local computer copy
@@ -12014,7 +12023,7 @@ set evac-filename "exp-irma-20190828-Irma-evac-nointernet"</setup>
       <value value="5000"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="save-county-evacuation-data">
-      <value value="true"/>
+      <value value="false"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="wind-threshold">
       <value value="72"/>
