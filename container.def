@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: comses/osg-netlogo:6.2.2
+From: comses/osg-netlogo:6.3.0
 Stage: spython-base
 
 %labels

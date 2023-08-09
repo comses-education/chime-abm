@@ -24,8 +24,8 @@ OSG_SUBMIT_FILENAME := scripts/${MODEL_NAME}.sub
 # the initial entrypoint for the OSG job, calls ENTRYPOINT_SCRIPT
 OSG_JOB_SCRIPT := scripts/job-wrapper.sh
 
-SINGULARITY_DEF := Singularity.def
-CURRENT_VERSION := v1
+SINGULARITY_DEF := container.def
+CURRENT_VERSION := v3
 SINGULARITY_IMAGE_NAME = ${MODEL_NAME}-${CURRENT_VERSION}.sif
 
 .PHONY: clean deploy docker-run singularity-run docker-build singularity-build all
@@ -33,7 +33,7 @@ SINGULARITY_IMAGE_NAME = ${MODEL_NAME}-${CURRENT_VERSION}.sif
 all: build
 
 $(SINGULARITY_IMAGE_NAME):
-	singularity build --fakeroot ${SINGULARITY_IMAGE_NAME} ${SINGULARITY_DEF}
+	apptainer build --fakeroot ${SINGULARITY_IMAGE_NAME} ${SINGULARITY_DEF}
 
 $(OSG_SUBMIT_FILENAME): $(OSG_SUBMIT_TEMPLATE)
 	SINGULARITY_IMAGE_NAME=${SINGULARITY_IMAGE_NAME} \
