@@ -16,26 +16,27 @@ request_disk = 4 GB
 # Executable shell script wrapper that prints out basic system info and runs the specified Julia entrypoint script
 # pass in the full path or relative path Julia entrypoint as an argument (relative to the pwd of the singularity
 # container)
-Executable = job-wrapper.sh
-Arguments = ${ENTRYPOINT_SCRIPT_EXECUTABLE} /srv/${ENTRYPOINT_SCRIPT}
+Executable = ${ENTRYPOINT_SCRIPT}
+Arguments = $(experiment)
 
 # Inputs/outputs - in this case all model code is in the container at /code but the particular script we want to run
 # should be in a scripts directory relative to this submit script e.g., ./scripts/MODEL_NAME/
 # If you leave out transfer_output_files, all generated files comes back
 transfer_input_files = ${ENTRYPOINT_SCRIPT}
-transfer_output_files = ${OUTPUT_FILES}
+transfer_output_files = chime-output.csv
+transfer_output_remaps = "chime-output.csv = outputs/$(experiment).output.csv"
 
 # Error and output are the error and output channels from your job
 # that HTCondor returns from the remote host.
-Error = $(Cluster).$(Process).error
-Output = $(Cluster).$(Process).output
+error = logs/$(experiment).$(ProcId).error
+output = logs/$(experiment).$(ProcId).output
 
 # The LOG file is where HTCondor places information about your
 # job's status, success, and resource consumption.
-Log = $(Cluster).log
+log = logs/$(experiment).$(ProcId).log
 
 # FIXME: diagnostic purposes only, disable in prod
-stream_output = True
+# stream_output = True
 
 
 # Send the job to Held state on failure. 
@@ -46,4 +47,4 @@ stream_output = True
 
 # queue is the "start button" - it launches any jobs that have been
 # specified thus far.
-queue 1
+queue experiment from experiments.txt

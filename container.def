@@ -8,11 +8,21 @@ Stage: spython-base
     curator Allen Lee
     git-repository https://github.com/comses-education/chime-abm
 
+%environment
+    JAVA_TOOL_OPTIONS=-Xmx4G
+
 %help
 This container bundles the computational model code and dependencies for the CHIME-ABM model 
 
 %files
-	. /code
+    Legend /code
+    REGION /code
+    STORMS /code
+    flcensusdata /code
+    scripts /code
+    CHIME.nlogo /code
+    README.md /code
+    LICENSE /code
 
 %runscript
 	exec /opt/netlogo/netlogo-headless.sh "$@"

@@ -6,15 +6,13 @@ MODEL_NAME = chime-abm
 # the directory (in the container) where the computational model source
 # code or executable can be called, e.g., main.py | netlogo-headless.sh
 MODEL_CODE_DIRECTORY = /code
-# entrypoint script to be called by job-wrapper.sh
+# entrypoint script
 ENTRYPOINT_SCRIPT = run.sh
 # entrypoint script language (e.g., bash | python | julia)
 ENTRYPOINT_SCRIPT_EXECUTABLE := bash
 # the OSG output file to be transferred
-OSG_OUTPUT_FILES = 
+OSG_OUTPUT_FILES = chime-output.csv
 # submit template
 OSG_SUBMIT_TEMPLATE := scripts/submit.template
 # the submit file to be executed on OSG via `condor_submit ${OSG_SUBMIT_FILE}`
-OSG_SUBMIT_FILENAME = ${OSG_MODEL_NAME}.submit
-# the initial entrypoint for the OSG job, calls ENTRYPOINT_SCRIPT
-OSG_JOB_SCRIPT = scripts/job-wrapper.sh
+OSG_SUBMIT_FILENAME = ${OSG_MODEL_NAME}.sub

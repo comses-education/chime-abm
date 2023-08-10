@@ -25,7 +25,7 @@ OSG_SUBMIT_FILENAME := scripts/${MODEL_NAME}.sub
 OSG_JOB_SCRIPT := scripts/job-wrapper.sh
 
 SINGULARITY_DEF := container.def
-CURRENT_VERSION := v3
+CURRENT_VERSION := v1
 SINGULARITY_IMAGE_NAME = ${MODEL_NAME}-${CURRENT_VERSION}.sif
 
 .PHONY: clean deploy docker-run singularity-run docker-build singularity-build all
@@ -60,7 +60,7 @@ deploy: build
 	rsync -avzP ${SINGULARITY_IMAGE_NAME} ${OSG_SUBMIT_NODE}:${OSG_CONTAINER_FILEDIR}/${OSG_USERNAME}
 	echo "Creating ${MODEL_NAME} folder in /home/${OSG_USERNAME}"
 	ssh ${OSG_USERNAME}@${OSG_SUBMIT_NODE} "mkdir -p ${MODEL_NAME}"
-	echo "Copying submit filename, job script, and model-specific scripts in ./scripts/ to /home/${OSG_USERNAME}/${MODEL_NAME}"
+	echo "Copying submit script, job script, and model-specific scripts in ./scripts/ to /home/${OSG_USERNAME}/${MODEL_NAME}"
 	rsync -avzP scripts/ ${OSG_SUBMIT_NODE}:${MODEL_NAME}/
 
 docker-run: docker-build

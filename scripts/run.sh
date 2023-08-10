@@ -1,6 +1,9 @@
+#!/bin/bash
+
+
 /opt/netlogo/netlogo-headless.sh \
     --model /code/CHIME.nlogo \
-    --experiment osg_experiment_short \
-    --table chime-output.csv \
+    --experiment $1 \
+    --table /srv/chime-output.csv \
     --threads 20
 
