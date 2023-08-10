@@ -3554,7 +3554,7 @@ SWITCH
 894
 save-agent-data-each-step
 save-agent-data-each-step
-0
+1
 1
 -1000
 
@@ -12054,9 +12054,10 @@ set evac-filename "exp-irma-20190828-Irma-evac-nointernet"</setup>
       <value value="10"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="osg_irma_county_evac_output_no_factors" repetitions="1" runMetricsEveryStep="false">
+  <experiment name="osg_irma_county_evac_output_no_factors" repetitions="50" runMetricsEveryStep="false">
     <setup>setup</setup>
     <go>go
+set county-evacuation-list []
 record-county-evac-data current-date</go>
     <timeLimit steps="132"/>
     <metric>county-evacuation-list</metric>
@@ -12169,9 +12170,10 @@ record-county-evac-data current-date</go>
       <value value="10"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="osg_irma_county_evac_output_over65" repetitions="1" runMetricsEveryStep="false">
+  <experiment name="osg_irma_county_evac_output_over65" repetitions="50" runMetricsEveryStep="false">
     <setup>setup</setup>
     <go>go
+set county-evacuation-list []
 record-county-evac-data current-date</go>
     <timeLimit steps="132"/>
     <metric>county-evacuation-list</metric>
@@ -12284,9 +12286,10 @@ record-county-evac-data current-date</go>
       <value value="10"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="osg_irma_county_evac_output_under18" repetitions="1" runMetricsEveryStep="false">
+  <experiment name="osg_irma_county_evac_output_under18" repetitions="50" runMetricsEveryStep="false">
     <setup>setup</setup>
     <go>go
+set county-evacuation-list []
 record-county-evac-data current-date</go>
     <timeLimit steps="132"/>
     <metric>county-evacuation-list</metric>
@@ -12399,9 +12402,10 @@ record-county-evac-data current-date</go>
       <value value="10"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="osg_irma_county_evac_output_no_vehicle" repetitions="1" runMetricsEveryStep="false">
+  <experiment name="osg_irma_county_evac_output_no_vehicle" repetitions="50" runMetricsEveryStep="false">
     <setup>setup</setup>
     <go>go
+set county-evacuation-list []
 record-county-evac-data current-date</go>
     <timeLimit steps="132"/>
     <metric>county-evacuation-list</metric>
@@ -12514,9 +12518,10 @@ record-county-evac-data current-date</go>
       <value value="10"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="osg_irma_county_evac_output_food_stamps" repetitions="1" runMetricsEveryStep="false">
+  <experiment name="osg_irma_county_evac_output_food_stamps" repetitions="50" runMetricsEveryStep="false">
     <setup>setup</setup>
     <go>go
+set county-evacuation-list []
 record-county-evac-data current-date</go>
     <timeLimit steps="132"/>
     <metric>county-evacuation-list</metric>
