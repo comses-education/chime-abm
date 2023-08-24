@@ -8,11 +8,9 @@ MODEL_NAME = chime-abm
 MODEL_CODE_DIRECTORY = /code
 # entrypoint script
 ENTRYPOINT_SCRIPT = run.sh
-# entrypoint script language (e.g., bash | python | julia)
-ENTRYPOINT_SCRIPT_EXECUTABLE := bash
 # the OSG output file to be transferred
 OSG_OUTPUT_FILES = chime-output.csv
 # submit template
 OSG_SUBMIT_TEMPLATE := scripts/submit.template
 # the submit file to be executed on OSG via `condor_submit ${OSG_SUBMIT_FILE}`
-OSG_SUBMIT_FILENAME = ${OSG_MODEL_NAME}.sub
+OSG_SUBMIT_FILENAME = ${MODEL_NAME}.sub
