@@ -1,6 +1,7 @@
 # customize via `% make build OSG_USERNAME=<your-osg-username>` e.g., `% make build OSG_USERNAME=alee`
 include config.mk
 
+
 # user to connect to OSG as
 OSG_USERNAME := ${OSG_USERNAME}
 OSG_SUBMIT_NODE := osg
@@ -45,7 +46,10 @@ docker-build: $(OSG_SUBMIT_FILENAME)
 
 apptainer-build: $(CONTAINER_DEF) $(APPTAINER_IMAGE_NAME)
 
-build: docker-build apptainer-build
+config.mk: config.mk.template
+	cp config.mk.template config.mk
+
+build: config.mk docker-build apptainer-build
 
 clean:
 	rm -f ${APPTAINER_IMAGE_NAME} ${OSG_SUBMIT_FILENAME} *~
